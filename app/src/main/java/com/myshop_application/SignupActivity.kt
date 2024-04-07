@@ -42,6 +42,7 @@ class SignupActivity : AppCompatActivity() {
             phone = binding.phoneEditTextView.text.toString(),
             nickname = binding.nickNameEditTextView.text.toString(),
             birth = binding.birthEditTextView.text.toString().toInt()
+
         )
         viewModel.signup(dto)
     }

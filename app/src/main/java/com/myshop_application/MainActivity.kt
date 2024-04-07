@@ -11,10 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val token = intent.getStringExtra("token")
 
-        var isLogin = false
-
-        if (!isLogin) {
+        if (token.isNullOrBlank()) {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }

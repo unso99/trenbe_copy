@@ -9,4 +9,8 @@ class MemberRepositoryImpl : MemberRepository{
     override suspend fun addMember(dto: Member): Response<MemberResponse> {
         return RetrofitManager.memberService.addMember(dto)
     }
+
+    override suspend fun login(dto: Member): Response<MemberResponse> {
+        return RetrofitManager.memberService.login(dto)
+    }
 }

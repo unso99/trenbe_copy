@@ -9,4 +9,7 @@ import retrofit2.http.POST
 interface MemberService {
     @POST("member/post-member")
     suspend fun addMember(@Body body: Member): Response<MemberResponse>
+
+    @POST("member/login")
+    suspend fun login(@Body body: Member) : Response<MemberResponse>
 }

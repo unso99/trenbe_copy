@@ -1,5 +1,6 @@
 package com.myshop_application.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,14 +10,16 @@ import com.myshop_application.model.Member
 import com.myshop_application.repository.MemberRepository
 import kotlinx.coroutines.launch
 
-class SignupViewModel(private val repository: MemberRepository) : ViewModel() {
+class LoginViewModel(private val repository: MemberRepository) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
-    fun signup(dto: Member) {
+    var token = ""
+    fun login(dto: Member) {
         viewModelScope.launch {
-            val response = repository.addMember(dto)
+            val response = repository.login(dto)
             if (response.isSuccessful) {
+                token = response.body()!!.token
                 _isSuccess.postValue(true)
             } else {
                 _isSuccess.postValue(false)
@@ -24,11 +27,11 @@ class SignupViewModel(private val repository: MemberRepository) : ViewModel() {
         }
     }
 
-    //acitivity에서 viewmodel을 호출할때파라미터를 가져오기 위함
     class ViewModelFactory(private val repository: MemberRepository) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return SignupViewModel(repository) as T
+            return LoginViewModel(repository) as T
         }
     }
+
 }
