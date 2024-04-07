@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="view"
+            type="com.myshop_application.SignupActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,6 +140,7 @@
                     android:layout_marginTop="32dp"
                     android:background="@color/black"
                     android:text="가입하기"
+                    android:onClick="@{() -> view.signup()}"
                     android:textColor="@color/white" />
             </LinearLayout>
 
