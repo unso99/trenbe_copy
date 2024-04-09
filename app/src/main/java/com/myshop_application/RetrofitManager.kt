@@ -2,6 +2,7 @@ package com.myshop_application
 
 import com.google.gson.Gson
 import com.myshop_application.service.MemberService
+import com.myshop_application.service.ProductService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -30,5 +31,7 @@ object RetrofitManager {
         .build()
 
     val memberService : MemberService by lazy { retrofit.create(MemberService::class.java) }
+
+    val productService : ProductService by lazy { retrofit.create(ProductService::class.java) }
 
 }
