@@ -6,7 +6,7 @@ data class Product(
     val price : Long,
     val brand : String,
     val category : String,
-    val imageUrl : String
+    val imageUrl : String,
 )
 
 data class ProductResponse(

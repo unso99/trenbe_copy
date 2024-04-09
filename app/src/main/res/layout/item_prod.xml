@@ -4,22 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.myshop_application.model.Product" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
+            android:padding="8dp"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +34,7 @@
                 android:id="@+id/brandTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.brand}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView"
                 tools:text="몽클레어" />
@@ -41,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:text="@{item.name}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/brandTextView"
                 tools:text="설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명" />
@@ -49,6 +54,7 @@
                 android:id="@+id/priceTextView"
                 android:layout_width="wrap_content"
                 android:textStyle="bold"
+                app:money="@{item.price}"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTextView"

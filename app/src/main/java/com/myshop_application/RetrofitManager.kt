@@ -1,6 +1,7 @@
 package com.myshop_application
 
 import com.google.gson.Gson
+import com.myshop_application.service.ImageService
 import com.myshop_application.service.MemberService
 import com.myshop_application.service.ProductService
 import okhttp3.OkHttpClient
@@ -33,5 +34,7 @@ object RetrofitManager {
     val memberService : MemberService by lazy { retrofit.create(MemberService::class.java) }
 
     val productService : ProductService by lazy { retrofit.create(ProductService::class.java) }
+
+    val imageService : ImageService by lazy { retrofit.create(ImageService::class.java) }
 
 }
