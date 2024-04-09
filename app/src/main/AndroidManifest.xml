@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/app"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyShop_application"
         tools:targetApi="31">

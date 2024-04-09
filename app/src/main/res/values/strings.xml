@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">myShop_application</string>
+    <string name="app_name">trenbi</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
