@@ -5,17 +5,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.myshop_application.model.Common
 import com.myshop_application.model.Product
+import com.myshop_application.repository.CommonRepository
 import com.myshop_application.repository.ProductRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: ProductRepository) : ViewModel() {
+class MainViewModel(
+    private val productRepository: ProductRepository,
+    private val commonRepository: CommonRepository
+) : ViewModel() {
     private val _list = MutableLiveData<List<Product>>()
     val list: LiveData<List<Product>> = _list
+    private val _commonList = MutableLiveData<List<Common>>()
+    val commonList: LiveData<List<Common>> = _commonList
 
-    fun getList() {
+    fun getList(body: Product) {
         viewModelScope.launch {
-            val response = repository.getList()
+            val response = productRepository.getList(body)
             if (response.isSuccessful) {
                 val result = response.body()?.list ?: emptyList()
                 _list.postValue(result!!)
@@ -25,9 +32,24 @@ class MainViewModel(private val repository: ProductRepository) : ViewModel() {
         }
     }
 
-    class ViewModelFactory(private val repository: ProductRepository) : ViewModelProvider.Factory {
+    fun getCommonList(body: Common) {
+        viewModelScope.launch {
+            val response = commonRepository.getCommonList(body)
+            if (response.isSuccessful) {
+                val result = response.body()?.list ?: emptyList()
+                _commonList.postValue(result!!)
+            } else {
+                _commonList.postValue(emptyList())
+            }
+        }
+    }
+
+    class ViewModelFactory(
+        private val productRepository: ProductRepository,
+        private val commonRepository: CommonRepository
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MainViewModel(repository) as T
+            return MainViewModel(productRepository, commonRepository) as T
         }
     }
 }

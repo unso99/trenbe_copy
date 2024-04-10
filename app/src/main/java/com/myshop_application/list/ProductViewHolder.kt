@@ -11,7 +11,7 @@ class ProductViewHolder(private val binding: ItemProdBinding) :
 
     fun bind(item: Product) {
         binding.item = item
-        ImageProvider(this).getImage(item.imageUrl)
+        ImageProvider(this).getImage(item.imageUrl!!)
     }
 
     override fun getImage(bitmap: Bitmap) {
