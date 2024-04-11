@@ -6,4 +6,6 @@ import retrofit2.Response
 
 interface CartRepository {
     suspend fun addCart(dto: Cart): Response<CartResponse>
+
+    suspend fun getCarts(dto: Cart): Response<CartResponse>
 }

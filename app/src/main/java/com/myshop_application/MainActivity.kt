@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lifecycleOwner = this
+        binding.view = this
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
         token = preferences.getToken("token")
@@ -100,6 +101,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getList(body : Product) {
         viewModel.getList(body)
+    }
+
+    fun goCart() {
+        startActivity(Intent(this,CartActivity::class.java))
     }
 
     inner class Handler : ProductItemHandler {

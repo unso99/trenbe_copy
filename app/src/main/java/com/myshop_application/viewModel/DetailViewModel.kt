@@ -13,6 +13,9 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
+    private val _list = MutableLiveData<List<Cart>>()
+    val list: LiveData<List<Cart>> = _list
+
     fun addCart(dto: Cart) {
         viewModelScope.launch {
             val response = repository.addCart(dto)
@@ -20,6 +23,17 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
                 _isSuccess.postValue(true)
             } else {
                 _isSuccess.postValue(false)
+            }
+        }
+    }
+
+    fun getCarts(dto: Cart) {
+        viewModelScope.launch {
+            val response = repository.getCarts(dto)
+            if (response.isSuccessful) {
+                _list.postValue(response.body()?.list ?: emptyList())
+            } else {
+                _list.postValue(emptyList())
             }
         }
     }

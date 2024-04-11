@@ -9,4 +9,8 @@ class CartRepositoryImpl : CartRepository {
     override suspend fun addCart(dto: Cart): Response<CartResponse> {
         return RetrofitManager.cartService.cartAdd(dto)
     }
+
+    override suspend fun getCarts(dto: Cart): Response<CartResponse> {
+        return RetrofitManager.cartService.getCarts(dto)
+    }
 }
