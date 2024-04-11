@@ -1,39 +1,32 @@
 package com.myshop_application.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.myshop_application.model.Member
-import com.myshop_application.repository.MemberRepository
+import com.myshop_application.model.Cart
+import com.myshop_application.repository.CartRepository
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val repository: MemberRepository) : ViewModel() {
+class DetailViewModel(private val repository: CartRepository) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
-    var token = ""
-    lateinit var member : Member
-    fun login(dto: Member) {
+    fun addCart(dto: Cart) {
         viewModelScope.launch {
-            val response = repository.login(dto)
+            val response = repository.addCart(dto)
             if (response.isSuccessful) {
-                token = response.body()!!.token
                 _isSuccess.postValue(true)
-                member = dto
             } else {
                 _isSuccess.postValue(false)
             }
         }
     }
 
-    class ViewModelFactory(private val repository: MemberRepository) :
-        ViewModelProvider.Factory {
+    class ViewModelFactory(private val repository: CartRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return LoginViewModel(repository) as T
+            return DetailViewModel(repository) as T
         }
     }
-
 }

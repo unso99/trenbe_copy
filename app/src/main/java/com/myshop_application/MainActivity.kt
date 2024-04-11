@@ -12,6 +12,7 @@ import com.myshop_application.model.Common
 import com.myshop_application.model.Product
 import com.myshop_application.repository.CommonRepositoryImpl
 import com.myshop_application.repository.ProductRepositoryImpl
+import com.myshop_application.util.PreferenceUtil
 import com.myshop_application.viewModel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -20,14 +21,17 @@ class MainActivity : AppCompatActivity() {
         MainViewModel.ViewModelFactory(ProductRepositoryImpl(),CommonRepositoryImpl())
     }
     private val adapter = ProductListAdapter(Handler())
+    private lateinit var preferences : PreferenceUtil
     private var token : String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
-        token = intent.getStringExtra("token")
+        preferences = PreferenceUtil(this)
+        token = preferences.getToken("token")
 
         if (token.isNullOrBlank()) {
             startActivity(Intent(this, LoginActivity::class.java))

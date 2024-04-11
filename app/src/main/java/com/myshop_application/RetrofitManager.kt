@@ -1,6 +1,7 @@
 package com.myshop_application
 
 import com.google.gson.Gson
+import com.myshop_application.service.CartService
 import com.myshop_application.service.CommonService
 import com.myshop_application.service.ImageService
 import com.myshop_application.service.MemberService
@@ -40,4 +41,5 @@ object RetrofitManager {
 
     val commonService : CommonService by lazy { retrofit.create(CommonService::class.java) }
 
+    val cartService : CartService by lazy { retrofit.create(CartService::class.java) }
 }
