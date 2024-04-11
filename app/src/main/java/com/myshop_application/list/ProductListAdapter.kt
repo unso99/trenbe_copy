@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import com.myshop_application.databinding.ItemProdBinding
 import com.myshop_application.model.Product
 
-class ProductListAdapter : ListAdapter<Product, ProductViewHolder>(diffUtil) {
+class ProductListAdapter(private val itemHandler: ProductItemHandler? = null) :
+    ListAdapter<Product, ProductViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ProductViewHolder(ItemProdBinding.inflate(inflater, parent, false))
+        return ProductViewHolder(ItemProdBinding.inflate(inflater, parent, false), itemHandler)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {

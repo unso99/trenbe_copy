@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayout
 import com.myshop_application.databinding.ActivityMainBinding
+import com.myshop_application.list.ProductItemHandler
 import com.myshop_application.list.ProductListAdapter
 import com.myshop_application.model.Common
 import com.myshop_application.model.Product
@@ -18,14 +19,15 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels {
         MainViewModel.ViewModelFactory(ProductRepositoryImpl(),CommonRepositoryImpl())
     }
-    private val adapter = ProductListAdapter()
+    private val adapter = ProductListAdapter(Handler())
+    private var token : String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
-        val token = intent.getStringExtra("token")
+        token = intent.getStringExtra("token")
 
         if (token.isNullOrBlank()) {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -94,5 +96,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun getList(body : Product) {
         viewModel.getList(body)
+    }
+
+    inner class Handler : ProductItemHandler {
+        override fun onClickItem(item: Product) {
+            val intent = Intent(this@MainActivity,DetailActivity::class.java)
+            intent.putExtra("item",item)
+            intent.putExtra("token",token)
+            startActivity(intent)
+        }
+
     }
 }

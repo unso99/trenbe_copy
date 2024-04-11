@@ -1,5 +1,7 @@
 package com.myshop_application.model
 
+import java.io.Serializable
+
 data class Product(
     val id : Long? = null,
     val name : String? = null,
@@ -7,7 +9,7 @@ data class Product(
     val brand : String? = null,
     val category : String? = null,
     val imageUrl : String? = null,
-)
+) : Serializable
 
 data class ProductResponse(
     val dto : Product,
