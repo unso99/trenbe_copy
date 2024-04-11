@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="view"
             type="com.myshop_application.DetailActivity" />
+
         <variable
             name="item"
             type="com.myshop_application.model.Product" />
@@ -35,8 +37,8 @@
                     android:id="@+id/backImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:onClick="@{() -> view.onBack()}"
+                    android:padding="8dp"
                     android:src="@drawable/baseline_arrow_back_ios_24" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -55,53 +57,141 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="0dp"
-            android:layout_height="400dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/buyButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbarLayout"
-            tools:src="@drawable/baseline_search_24" />
+            app:layout_constraintTop_toBottomOf="@id/appbarLayout">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/brandTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@{item.brand}"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView"
-            tools:text="발렌시아가" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:text="@{item.name}"
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/brandTextView"
-            tools:text="오버사이즈 데님 자켓 Oversized Denim Jacket 993115 Matte Blk 1129" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="400dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/baseline_search_24" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/priceTextView"
-            app:money="@{item.price}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameTextView"
-            tools:text="1,822,221원" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/brandTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{item.brand}"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView"
+                    tools:text="발렌시아가" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{item.name}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/brandTextView"
+                    tools:text="오버사이즈 데님 자켓 Oversized Denim Jacket 993115 Matte Blk 1129" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/priceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nameTextView"
+                    app:money="@{item.price}"
+                    tools:text="1,822,221원" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/priceTextView" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:minHeight="?attr/minTouchTargetSize"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spinner">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableStart="@drawable/baseline_local_shipping_24"
+                        android:drawablePadding="8dp"
+                        android:maxLines="1"
+                        android:paddingEnd="16dp"
+                        android:text="7~9일 이내 도착 (무료배송/관부가세포함)"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/mtrl_list_item_tint" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableStart="@drawable/baseline_support_agent_24"
+                        android:drawablePadding="8dp"
+                        android:maxLines="1"
+                        android:paddingEnd="16dp"
+                        android:text="교환/반품 안내"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/mtrl_list_item_tint" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableStart="@drawable/outline_new_releases_24"
+                        android:drawablePadding="8dp"
+                        android:maxLines="1"
+                        android:paddingEnd="16dp"
+                        android:text="B머니 최대 30,370원 적립 예정"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/mtrl_list_item_tint" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableStart="@drawable/baseline_credit_card_24"
+                        android:drawablePadding="8dp"
+                        android:maxLines="1"
+                        android:paddingEnd="16dp"
+                        android:text="4월 무이자 카드 할부 안내"
+                        android:textAppearance="?attr/textAppearanceSubtitle1"
+                        android:textColor="@color/mtrl_list_item_tint" />
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cartButton"
