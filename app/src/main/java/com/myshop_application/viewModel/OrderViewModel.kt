@@ -5,12 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.myshop_application.model.Order
 import com.myshop_application.repository.OrderRepository
 import kotlinx.coroutines.launch
 
 class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
-    private val _orderId = MutableLiveData<Int>()
-    val orderId: LiveData<Int> = _orderId
+    private val _orderId = MutableLiveData<Long>()
+    val orderId: LiveData<Long> = _orderId
+
+    private val _isSuccess = MutableLiveData<Boolean>()
+    val isSuccess: LiveData<Boolean> = _isSuccess
 
     fun getOrderId() {
         viewModelScope.launch {
@@ -19,6 +23,17 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
                 _orderId.postValue(response.body())
             } else {
                 _orderId.postValue(-1)
+            }
+        }
+    }
+
+    fun addOrder(dto: Order) {
+        viewModelScope.launch {
+            val response = repository.addOrders(dto)
+            if (response.isSuccessful) {
+                _isSuccess.postValue(true)
+            } else {
+                _isSuccess.postValue(false)
             }
         }
     }

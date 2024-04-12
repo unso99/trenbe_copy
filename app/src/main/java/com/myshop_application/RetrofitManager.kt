@@ -5,6 +5,7 @@ import com.myshop_application.service.CartService
 import com.myshop_application.service.CommonService
 import com.myshop_application.service.ImageService
 import com.myshop_application.service.MemberService
+import com.myshop_application.service.OrderDetailService
 import com.myshop_application.service.OrderService
 import com.myshop_application.service.ProductService
 import okhttp3.OkHttpClient
@@ -45,4 +46,6 @@ object RetrofitManager {
     val cartService: CartService by lazy { retrofit.create(CartService::class.java) }
 
     val orderService: OrderService by lazy { retrofit.create(OrderService::class.java) }
+
+    val orderDetailService: OrderDetailService by lazy { retrofit.create(OrderDetailService::class.java) }
 }
