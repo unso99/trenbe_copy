@@ -14,5 +14,5 @@ data class Product(
 data class ProductResponse(
     val dto : Product,
     val list : List<Product>,
-    val status : String
+    val error : String
 )

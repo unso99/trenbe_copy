@@ -14,12 +14,13 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitManager {
 
-    const val BASE_URL = "http://192.168.45.203:9000/myShop/"
+    //    const val BASE_URL = "http://192.168.45.203:9000/myShop/"
+    const val BASE_URL = "http://192.168.129.199:9000/myShop/"
 
     private val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(5,TimeUnit.SECONDS)
-        .writeTimeout(5,TimeUnit.SECONDS)
-        .readTimeout(5,TimeUnit.SECONDS)
+        .connectTimeout(5, TimeUnit.SECONDS)
+        .writeTimeout(5, TimeUnit.SECONDS)
+        .readTimeout(5, TimeUnit.SECONDS)
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
@@ -33,13 +34,13 @@ object RetrofitManager {
         .client(okHttpClient)
         .build()
 
-    val memberService : MemberService by lazy { retrofit.create(MemberService::class.java) }
+    val memberService: MemberService by lazy { retrofit.create(MemberService::class.java) }
 
-    val productService : ProductService by lazy { retrofit.create(ProductService::class.java) }
+    val productService: ProductService by lazy { retrofit.create(ProductService::class.java) }
 
-    val imageService : ImageService by lazy { retrofit.create(ImageService::class.java) }
+    val imageService: ImageService by lazy { retrofit.create(ImageService::class.java) }
 
-    val commonService : CommonService by lazy { retrofit.create(CommonService::class.java) }
+    val commonService: CommonService by lazy { retrofit.create(CommonService::class.java) }
 
-    val cartService : CartService by lazy { retrofit.create(CartService::class.java) }
+    val cartService: CartService by lazy { retrofit.create(CartService::class.java) }
 }

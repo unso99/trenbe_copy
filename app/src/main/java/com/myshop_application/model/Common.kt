@@ -10,5 +10,5 @@ data class Common(
 data class CommonResponse(
     val dto : Common,
     val list : List<Common>,
-    val status : String
+    val error : String
 )

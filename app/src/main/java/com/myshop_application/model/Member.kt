@@ -15,5 +15,5 @@ data class MemberResponse(
     val dto : Member,
     val list : List<Member>,
     val token : String,
-    val status : String
+    val error : String
 )

@@ -14,5 +14,5 @@ data class Cart(
 data class CartResponse(
     val dto : Cart,
     val list : List<Cart>,
-    val status : String
+    val error : String
 )
