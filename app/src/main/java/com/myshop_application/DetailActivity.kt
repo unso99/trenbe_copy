@@ -55,11 +55,11 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
 
     private fun observeViewModel() {
         viewModel.isSuccess.observe(this) {
-            if(it) {
-                Toast.makeText(this,"장바구니에 추가 되었습니다.",Toast.LENGTH_SHORT).show()
+            if (it) {
+                Toast.makeText(this, "장바구니에 추가 되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
-            }else{
-                Toast.makeText(this,"장바구니에 추가 하지 못했습니다.",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "장바구니에 추가 하지 못했습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -80,5 +80,4 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
         )
         viewModel.addCart(cart)
     }
-
 }

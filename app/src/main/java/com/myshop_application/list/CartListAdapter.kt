@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.myshop_application.databinding.ItemCartBinding
 import com.myshop_application.model.Cart
 
-class CartListAdapter : ListAdapter<Cart, CartViewHolder>(diffUtil) {
+class CartListAdapter(private val itemHandler: CartItemHandler? = null) :
+    ListAdapter<Cart, CartViewHolder>(diffUtil) {
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Cart>() {
@@ -24,7 +25,7 @@ class CartListAdapter : ListAdapter<Cart, CartViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return CartViewHolder(ItemCartBinding.inflate(inflater, parent, false))
+        return CartViewHolder(ItemCartBinding.inflate(inflater, parent, false), itemHandler)
     }
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {

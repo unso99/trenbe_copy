@@ -38,6 +38,17 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
         }
     }
 
+    fun deleteCart(dto: Cart) {
+        viewModelScope.launch {
+            val response = repository.deleteCart(dto);
+            if (response.isSuccessful) {
+                _list.postValue(response.body()?.list ?: emptyList())
+            } else {
+                _list.postValue(emptyList())
+            }
+        }
+    }
+
     class ViewModelFactory(private val repository: CartRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return DetailViewModel(repository) as T

@@ -12,4 +12,7 @@ interface CartService {
 
     @POST("cart/get-carts")
     suspend fun getCarts(@Body body: Cart): Response<CartResponse>
+
+    @POST("cart/delete-cart")
+    suspend fun deleteCart(@Body body: Cart): Response<CartResponse>
 }

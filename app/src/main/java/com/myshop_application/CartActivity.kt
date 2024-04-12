@@ -1,9 +1,11 @@
 package com.myshop_application
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.myshop_application.databinding.ActivityCartBinding
+import com.myshop_application.list.CartItemHandler
 import com.myshop_application.list.CartListAdapter
 import com.myshop_application.model.Cart
 import com.myshop_application.repository.CartRepositoryImpl
@@ -12,7 +14,7 @@ import com.myshop_application.viewModel.DetailViewModel
 
 class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
-    private val adapter = CartListAdapter()
+    private val adapter = CartListAdapter(Handler())
     private val viewModel: DetailViewModel by viewModels {
         DetailViewModel.ViewModelFactory(CartRepositoryImpl())
     }
@@ -38,5 +40,12 @@ class CartActivity : AppCompatActivity() {
         val member = preferences.getMember("member")
         val cart = Cart(member_id = member!!.email)
         viewModel.getCarts(cart)
+    }
+
+    inner class Handler : CartItemHandler {
+        override fun onDeleteItem(item: Cart) {
+            viewModel.deleteCart(item)
+        }
+
     }
 }

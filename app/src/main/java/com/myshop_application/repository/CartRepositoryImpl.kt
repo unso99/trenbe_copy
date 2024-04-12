@@ -13,4 +13,8 @@ class CartRepositoryImpl : CartRepository {
     override suspend fun getCarts(dto: Cart): Response<CartResponse> {
         return RetrofitManager.cartService.getCarts(dto)
     }
+
+    override suspend fun deleteCart(dto: Cart): Response<CartResponse> {
+        return RetrofitManager.cartService.deleteCart(dto)
+    }
 }
