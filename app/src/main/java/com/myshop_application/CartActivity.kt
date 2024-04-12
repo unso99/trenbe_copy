@@ -1,7 +1,7 @@
 package com.myshop_application
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.myshop_application.databinding.ActivityCartBinding
@@ -11,6 +11,7 @@ import com.myshop_application.model.Cart
 import com.myshop_application.repository.CartRepositoryImpl
 import com.myshop_application.util.PreferenceUtil
 import com.myshop_application.viewModel.DetailViewModel
+import java.text.DecimalFormat
 
 class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
@@ -23,6 +24,7 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.view = this
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
@@ -33,6 +35,8 @@ class CartActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.list.observe(this) {
             adapter.submitList(it)
+            binding.orderButton.text = "주문하기\n" +
+                    "${DecimalFormat("#,###").format(viewModel.price) + "원"}"
         }
     }
 
@@ -40,6 +44,11 @@ class CartActivity : AppCompatActivity() {
         val member = preferences.getMember("member")
         val cart = Cart(member_id = member!!.email)
         viewModel.getCarts(cart)
+    }
+
+    fun goHome() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     inner class Handler : CartItemHandler {

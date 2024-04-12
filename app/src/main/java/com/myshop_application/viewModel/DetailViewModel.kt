@@ -16,6 +16,8 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
     private val _list = MutableLiveData<List<Cart>>()
     val list: LiveData<List<Cart>> = _list
 
+    var price = 0L
+
     fun addCart(dto: Cart) {
         viewModelScope.launch {
             val response = repository.addCart(dto)
@@ -32,6 +34,10 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
             val response = repository.getCarts(dto)
             if (response.isSuccessful) {
                 _list.postValue(response.body()?.list ?: emptyList())
+                price = 0
+                response.body()?.list!!.forEach {
+                    price += it.product_price!!
+                }
             } else {
                 _list.postValue(emptyList())
             }
@@ -43,6 +49,10 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
             val response = repository.deleteCart(dto);
             if (response.isSuccessful) {
                 _list.postValue(response.body()?.list ?: emptyList())
+                price = 0
+                response.body()?.list!!.forEach {
+                    price += it.product_price!!
+                }
             } else {
                 _list.postValue(emptyList())
             }
