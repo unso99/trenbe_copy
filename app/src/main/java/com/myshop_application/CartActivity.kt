@@ -28,8 +28,12 @@ class CartActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
-        getCart()
         observeViewModel()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCart()
     }
 
     private fun observeViewModel() {

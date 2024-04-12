@@ -1,7 +1,7 @@
 package com.myshop_application.model
 
 data class Cart(
-    val id : Long? = null,
+    val id : Long? = 0,
     val member_id : String? = null,
     val product_id : Long? = null,
     val createdAt : String? = null,

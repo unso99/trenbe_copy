@@ -58,7 +58,7 @@ class OrderActivity : AppCompatActivity() {
         orderViewModel.isSuccess.observe(this) {
             if(it) {
                 Toast.makeText(this,"주문 완료 되었습니다.",Toast.LENGTH_SHORT).show()
-                //todo 장바구니 초기화
+                detailViewModel.deleteCart(Cart(member_id = member.email))
                 finish()
             }
         }
