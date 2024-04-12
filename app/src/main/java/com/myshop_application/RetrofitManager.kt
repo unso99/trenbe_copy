@@ -5,6 +5,7 @@ import com.myshop_application.service.CartService
 import com.myshop_application.service.CommonService
 import com.myshop_application.service.ImageService
 import com.myshop_application.service.MemberService
+import com.myshop_application.service.OrderService
 import com.myshop_application.service.ProductService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,8 +15,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitManager {
 
-    //    const val BASE_URL = "http://192.168.45.203:9000/myShop/"
-    const val BASE_URL = "http://192.168.0.19:9000/myShop/"
+    const val BASE_URL = "http://192.168.45.202:9000/myShop/"
 
     private val okHttpClient = OkHttpClient.Builder()
         .connectTimeout(5, TimeUnit.SECONDS)
@@ -43,4 +43,6 @@ object RetrofitManager {
     val commonService: CommonService by lazy { retrofit.create(CommonService::class.java) }
 
     val cartService: CartService by lazy { retrofit.create(CartService::class.java) }
+
+    val orderService: OrderService by lazy { retrofit.create(OrderService::class.java) }
 }

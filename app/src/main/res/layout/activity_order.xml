@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="view"
+            type="com.myshop_application.OrderActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
+                        android:onClick="@{() -> view.back()}"
                         android:src="@drawable/baseline_arrow_back_ios_24"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
