@@ -1,6 +1,8 @@
 package com.myshop_application
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,7 +45,25 @@ class OrderActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
         initViewModel()
+        initView()
         observeViewModel()
+    }
+
+    private fun initView() {
+        binding.addressInputEditText.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                binding.payButton.isEnabled = s.length > 1
+            }
+
+        })
     }
 
     private fun observeViewModel() {
