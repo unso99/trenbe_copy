@@ -107,6 +107,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this,CartActivity::class.java))
     }
 
+    fun goSearch() {
+        startActivity(Intent(this,SearchActivity::class.java))
+    }
+
     inner class Handler : ProductItemHandler {
         override fun onClickItem(item: Product) {
             val intent = Intent(this@MainActivity,DetailActivity::class.java)

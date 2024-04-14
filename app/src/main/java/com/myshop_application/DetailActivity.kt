@@ -84,4 +84,9 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
         startActivity(Intent(this, CartActivity::class.java))
         finish()
     }
+
+    fun goSearch() {
+        startActivity(Intent(this,SearchActivity::class.java))
+        finish()
+    }
 }
