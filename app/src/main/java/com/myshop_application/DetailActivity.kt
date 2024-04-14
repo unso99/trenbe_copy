@@ -66,7 +66,6 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
 
     fun onBack() {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("token", token)
         startActivity(intent)
         finish()
     }
@@ -79,5 +78,10 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
             product_id = product_id
         )
         viewModel.addCart(cart)
+    }
+
+    fun goCart() {
+        startActivity(Intent(this, CartActivity::class.java))
+        finish()
     }
 }

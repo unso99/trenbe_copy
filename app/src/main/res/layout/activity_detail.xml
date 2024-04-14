@@ -50,6 +50,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> view.goCart()}"
                     android:padding="8dp"
                     android:src="@drawable/baseline_shopping_bag_24" />
             </LinearLayout>
@@ -199,9 +200,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@color/white"
+            android:onClick="@{() -> view.addCart()}"
             android:text="장바구니"
             android:textStyle="bold"
-            android:onClick="@{() -> view.addCart()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/buyButton"
             app:layout_constraintStart_toStartOf="parent" />
