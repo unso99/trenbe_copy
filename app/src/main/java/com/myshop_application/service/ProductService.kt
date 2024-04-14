@@ -10,4 +10,7 @@ import retrofit2.http.POST
 interface ProductService {
     @POST("product/get-list")
     suspend fun getList(@Body body: Product): Response<ProductResponse>
+
+    @POST("product/get-search-list")
+    suspend fun getSearchList(@Body body : String) : Response<ProductResponse>
 }

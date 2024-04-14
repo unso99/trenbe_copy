@@ -6,4 +6,5 @@ import retrofit2.Response
 
 interface ProductRepository {
     suspend fun getList(dto : Product) : Response<ProductResponse>
+    suspend fun getSearchList(keyword: String) : Response<ProductResponse>
 }

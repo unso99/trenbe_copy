@@ -115,9 +115,7 @@ class MainActivity : AppCompatActivity() {
         override fun onClickItem(item: Product) {
             val intent = Intent(this@MainActivity,DetailActivity::class.java)
             intent.putExtra("item",item)
-            intent.putExtra("token",token)
             startActivity(intent)
         }
-
     }
 }

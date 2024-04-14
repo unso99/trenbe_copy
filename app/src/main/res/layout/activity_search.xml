@@ -67,14 +67,18 @@
                 android:id="@+id/keywordEdtiText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:drawableStart="@drawable/baseline_search_24"
-                android:hint="원하시는 상품, 브랜드, 종류를 검색해보세요." />
+                android:maxLines="1"
+                android:hint="원하시는 상품, 브랜드, 종류를 검색해보세요."
+                android:imeOptions="actionSearch" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resultTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="티셔츠에 대한 1,227,650개의 검색결과"

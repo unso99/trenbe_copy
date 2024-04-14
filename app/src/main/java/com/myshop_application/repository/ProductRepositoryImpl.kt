@@ -9,4 +9,8 @@ class ProductRepositoryImpl : ProductRepository {
     override suspend fun getList(dto: Product): Response<ProductResponse> {
         return RetrofitManager.productService.getList(dto)
     }
+
+    override suspend fun getSearchList(keyword: String): Response<ProductResponse> {
+        return RetrofitManager.productService.getSearchList(keyword)
+    }
 }

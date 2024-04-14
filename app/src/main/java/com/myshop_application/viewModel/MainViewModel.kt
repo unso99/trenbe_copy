@@ -44,6 +44,18 @@ class MainViewModel(
         }
     }
 
+    fun getSearchList(keyword : String) {
+        viewModelScope.launch {
+            val response = productRepository.getSearchList(keyword)
+            if (response.isSuccessful) {
+                val result = response.body()?.list ?: emptyList()
+                _list.postValue(result!!)
+            } else {
+                _list.postValue(emptyList())
+            }
+        }
+    }
+
     class ViewModelFactory(
         private val productRepository: ProductRepository,
         private val commonRepository: CommonRepository
