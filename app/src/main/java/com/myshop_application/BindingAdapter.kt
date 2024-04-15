@@ -8,3 +8,8 @@ import java.text.DecimalFormat
 fun TextView.money(money: Long) {
     text = DecimalFormat("#,###").format(money) + "원"
 }
+
+@BindingAdapter("memberName")
+fun TextView.memberName(name : String) {
+    text = "${name}님"
+}

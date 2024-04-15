@@ -1,6 +1,5 @@
 package com.myshop_application.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,17 +13,29 @@ class LoginViewModel(private val repository: MemberRepository) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
+    private val _member = MutableLiveData<Member>()
+    val member: LiveData<Member> = _member
     var token = ""
-    lateinit var member : Member
     fun login(dto: Member) {
         viewModelScope.launch {
             val response = repository.login(dto)
             if (response.isSuccessful) {
                 token = response.body()!!.token
+                _member.postValue(response.body()!!.dto)
                 _isSuccess.postValue(true)
-                member = dto
             } else {
                 _isSuccess.postValue(false)
+            }
+        }
+    }
+
+    fun getMember(dto: Member) {
+        viewModelScope.launch {
+            val response = repository.getMember(dto)
+            if (response.isSuccessful) {
+                _member.postValue(response.body()?.dto ?: Member())
+            } else {
+                _member.postValue(Member())
             }
         }
     }

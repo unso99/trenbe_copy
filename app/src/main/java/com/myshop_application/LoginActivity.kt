@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     private val viewModel: LoginViewModel by viewModels {
         LoginViewModel.ViewModelFactory(MemberRepositoryImpl())
     }
-    private lateinit var preferences : PreferenceUtil
+    private lateinit var preferences: PreferenceUtil
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -32,12 +32,14 @@ class LoginActivity : AppCompatActivity() {
             if (it) {
                 val intent = Intent(this, MainActivity::class.java)
                 preferences.saveToken("token", viewModel.token)
-                preferences.saveMember("member", viewModel.member)
                 startActivity(intent)
                 finish()
             } else {
                 binding.errorTextView.isVisible = true
             }
+        }
+        viewModel.member.observe(this) {
+            preferences.saveMember("member", it)
         }
     }
 

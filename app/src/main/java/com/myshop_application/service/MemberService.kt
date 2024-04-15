@@ -11,5 +11,8 @@ interface MemberService {
     suspend fun addMember(@Body body: Member): Response<MemberResponse>
 
     @POST("member/login")
-    suspend fun login(@Body body: Member) : Response<MemberResponse>
+    suspend fun login(@Body body: Member): Response<MemberResponse>
+
+    @POST("member/get-member")
+    suspend fun getMember(@Body body: Member): Response<MemberResponse>
 }

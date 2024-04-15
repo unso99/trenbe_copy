@@ -56,7 +56,8 @@ class CartActivity : AppCompatActivity() {
     }
 
     fun goOrder() {
-        startActivity(Intent(this,OrderActivity::class.java))
+        startActivity(Intent(this, OrderActivity::class.java))
+        finish()
     }
 
     inner class Handler : CartItemHandler {

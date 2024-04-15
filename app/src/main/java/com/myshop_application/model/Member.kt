@@ -3,8 +3,8 @@ package com.myshop_application.model
 import android.net.http.UrlRequest.Status
 
 data class Member(
-    val email : String,
-    val password : String,
+    val email : String = "",
+    val password : String = "",
     val name : String = "",
     val phone : String = "",
     val nickname : String = "",
