@@ -215,6 +215,7 @@
             android:layout_margin="8dp"
             android:background="@color/black"
             android:text="구매하기"
+            android:onClick="@{() -> view.buy()}"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

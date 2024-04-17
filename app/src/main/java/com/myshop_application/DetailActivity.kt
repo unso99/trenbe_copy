@@ -89,4 +89,9 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
         startActivity(Intent(this,SearchActivity::class.java))
         finish()
     }
+
+    fun buy(){
+        addCart()
+        goCart()
+    }
 }
