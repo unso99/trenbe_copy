@@ -14,7 +14,7 @@ class MemberRepositoryImpl : MemberRepository {
         return RetrofitManager.memberService.login(dto)
     }
 
-    override suspend fun getMember(dto: Member): Response<MemberResponse> {
-        return RetrofitManager.memberService.getMember(dto)
+    override suspend fun getMember(token: String, dto: Member): Response<MemberResponse> {
+        return RetrofitManager.memberService.getMember(token,dto)
     }
 }

@@ -36,6 +36,7 @@ class OrderActivity : AppCompatActivity() {
     private lateinit var preferences: PreferenceUtil
     private var orderId = -1L
     private lateinit var member: Member
+    private var token = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderBinding.inflate(layoutInflater)
@@ -44,13 +45,14 @@ class OrderActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
+        token = preferences.getToken("token")!!
         initViewModel()
         initView()
         observeViewModel()
     }
 
     private fun initView() {
-        binding.addressInputEditText.addTextChangedListener(object : TextWatcher{
+        binding.addressInputEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -76,9 +78,9 @@ class OrderActivity : AppCompatActivity() {
             orderId = it
         }
         orderViewModel.isSuccess.observe(this) {
-            if(it) {
-                Toast.makeText(this,"주문 완료 되었습니다.",Toast.LENGTH_SHORT).show()
-                detailViewModel.deleteCart(Cart(member_id = member.email))
+            if (it) {
+                Toast.makeText(this, "주문 완료 되었습니다.", Toast.LENGTH_SHORT).show()
+                detailViewModel.deleteCart(token, Cart(member_id = member.email))
                 finish()
             }
         }
@@ -90,7 +92,7 @@ class OrderActivity : AppCompatActivity() {
                     total_price = detailViewModel.price,
                     address = binding.addressInputEditText.text.toString()
                 )
-                orderViewModel.addOrder(order)
+                orderViewModel.addOrder(token,order)
             }
         }
     }
@@ -98,8 +100,8 @@ class OrderActivity : AppCompatActivity() {
     private fun initViewModel() {
         member = preferences.getMember("member") as Member
         val cart = Cart(member_id = member!!.email)
-        detailViewModel.getCarts(cart)
-        orderViewModel.getOrderId()
+        detailViewModel.getCarts(token, cart)
+        orderViewModel.getOrderId(token)
     }
 
     fun back() {
@@ -112,7 +114,7 @@ class OrderActivity : AppCompatActivity() {
                 orders_id = orderId,
                 product_id = it.product_id!!
             )
-            orderDetailViewModel.addOrderDetail(orderDetail)
+            orderDetailViewModel.addOrderDetail(token,orderDetail)
         }
     }
 }

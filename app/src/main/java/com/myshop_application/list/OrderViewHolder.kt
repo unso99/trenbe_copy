@@ -7,13 +7,14 @@ import com.myshop_application.model.Cart
 import com.myshop_application.repository.ImageProvider
 
 class OrderViewHolder(
-    private val binding: ItemOrderBinding
+    private val binding: ItemOrderBinding,
+    private val token : String
 ) :
     RecyclerView.ViewHolder(binding.root), ImageProvider.Callback {
 
     fun bind(item: Cart) {
         binding.item = item
-        ImageProvider(this).getImage(item.product_imageUrl!!)
+        ImageProvider(this).getImage(token,item.product_imageUrl!!)
     }
 
     override fun getImage(bitmap: Bitmap) {

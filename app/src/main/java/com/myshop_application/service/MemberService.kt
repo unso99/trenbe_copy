@@ -4,6 +4,7 @@ import com.myshop_application.model.Member
 import com.myshop_application.model.MemberResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface MemberService {
@@ -14,5 +15,8 @@ interface MemberService {
     suspend fun login(@Body body: Member): Response<MemberResponse>
 
     @POST("member/get-member")
-    suspend fun getMember(@Body body: Member): Response<MemberResponse>
+    suspend fun getMember(
+        @Header("Authorization") token: String,
+        @Body body: Member
+    ): Response<MemberResponse>
 }

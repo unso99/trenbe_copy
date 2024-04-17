@@ -6,11 +6,11 @@ import com.myshop_application.model.ProductResponse
 import retrofit2.Response
 
 class ProductRepositoryImpl : ProductRepository {
-    override suspend fun getList(dto: Product): Response<ProductResponse> {
-        return RetrofitManager.productService.getList(dto)
+    override suspend fun getList(token: String, dto: Product): Response<ProductResponse> {
+        return RetrofitManager.productService.getList(token,dto)
     }
 
-    override suspend fun getSearchList(keyword: String): Response<ProductResponse> {
-        return RetrofitManager.productService.getSearchList(keyword)
+    override suspend fun getSearchList(token: String, keyword: String): Response<ProductResponse> {
+        return RetrofitManager.productService.getSearchList(token,keyword)
     }
 }

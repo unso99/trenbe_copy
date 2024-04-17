@@ -5,6 +5,6 @@ import com.myshop_application.model.ProductResponse
 import retrofit2.Response
 
 interface ProductRepository {
-    suspend fun getList(dto : Product) : Response<ProductResponse>
-    suspend fun getSearchList(keyword: String) : Response<ProductResponse>
+    suspend fun getList(token:String, dto : Product) : Response<ProductResponse>
+    suspend fun getSearchList(token:String,keyword: String) : Response<ProductResponse>
 }

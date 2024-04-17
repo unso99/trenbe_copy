@@ -4,13 +4,19 @@ import com.myshop_application.model.Product
 import com.myshop_application.model.ProductResponse
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface ProductService {
     @POST("product/get-list")
-    suspend fun getList(@Body body: Product): Response<ProductResponse>
+    suspend fun getList(
+        @Header("Authorization") token: String,
+        @Body body: Product
+    ): Response<ProductResponse>
 
     @POST("product/get-search-list")
-    suspend fun getSearchList(@Body body : String) : Response<ProductResponse>
+    suspend fun getSearchList(
+        @Header("Authorization") token: String,
+        @Body body: String
+    ): Response<ProductResponse>
 }

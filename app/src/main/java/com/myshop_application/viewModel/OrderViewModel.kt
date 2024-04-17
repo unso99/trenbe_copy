@@ -16,9 +16,9 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
-    fun getOrderId() {
+    fun getOrderId(token:String) {
         viewModelScope.launch {
-            val response = repository.getOrderId()
+            val response = repository.getOrderId(token)
             if (response.isSuccessful) {
                 _orderId.postValue(response.body())
             } else {
@@ -27,9 +27,9 @@ class OrderViewModel(private val repository: OrderRepository) : ViewModel() {
         }
     }
 
-    fun addOrder(dto: Order) {
+    fun addOrder(token:String,dto: Order) {
         viewModelScope.launch {
-            val response = repository.addOrders(dto)
+            val response = repository.addOrders(token,dto)
             if (response.isSuccessful) {
                 _isSuccess.postValue(true)
             } else {

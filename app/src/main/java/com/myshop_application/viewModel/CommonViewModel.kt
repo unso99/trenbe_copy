@@ -13,10 +13,10 @@ class CommonViewModel(private val repository: CommonRepository) : ViewModel() {
     private val _list = MutableLiveData<List<Common>>()
     val list: LiveData<List<Common>> = _list
 
-    fun getCategory(p_code_id: Int) {
+    fun getCategory(token: String, p_code_id: Int) {
         viewModelScope.launch {
             val common = Common(p_code_id = p_code_id)
-            val response = repository.getCommonList(common)
+            val response = repository.getCommonList(token, common)
             if (response.isSuccessful) {
                 _list.postValue(response.body()?.list ?: emptyList())
             } else {

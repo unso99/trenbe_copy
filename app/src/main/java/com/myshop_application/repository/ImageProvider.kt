@@ -10,9 +10,9 @@ import retrofit2.Response
 
 class ImageProvider(private val callback: Callback) {
 
-    fun getImage(imageUrl : String) {
+    fun getImage(token:String,imageUrl : String) {
         val dto = Image(imageUrl = imageUrl)
-        RetrofitManager.imageService.getImage(dto)
+        RetrofitManager.imageService.getImage(token,dto)
             .enqueue(object : retrofit2.Callback<ResponseBody>{
                 override fun onResponse(
                     call: Call<ResponseBody>,

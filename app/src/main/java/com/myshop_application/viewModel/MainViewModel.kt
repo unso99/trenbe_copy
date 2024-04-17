@@ -20,9 +20,9 @@ class MainViewModel(
     private val _commonList = MutableLiveData<List<Common>>()
     val commonList: LiveData<List<Common>> = _commonList
 
-    fun getList(body: Product) {
+    fun getList(token : String, body: Product) {
         viewModelScope.launch {
-            val response = productRepository.getList(body)
+            val response = productRepository.getList(token,body)
             if (response.isSuccessful) {
                 val result = response.body()?.list ?: emptyList()
                 _list.postValue(result!!)
@@ -32,9 +32,9 @@ class MainViewModel(
         }
     }
 
-    fun getCommonList(body: Common) {
+    fun getCommonList(token:String,body: Common) {
         viewModelScope.launch {
-            val response = commonRepository.getCommonList(body)
+            val response = commonRepository.getCommonList(token,body)
             if (response.isSuccessful) {
                 val result = response.body()?.list ?: emptyList()
                 _commonList.postValue(result!!)
@@ -44,9 +44,9 @@ class MainViewModel(
         }
     }
 
-    fun getSearchList(keyword : String) {
+    fun getSearchList(token:String,keyword : String) {
         viewModelScope.launch {
-            val response = productRepository.getSearchList(keyword)
+            val response = productRepository.getSearchList(token,keyword)
             if (response.isSuccessful) {
                 val result = response.body()?.list ?: emptyList()
                 _list.postValue(result!!)

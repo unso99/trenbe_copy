@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.isSuccess.observe(this) {
             if (it) {
                 val intent = Intent(this, MainActivity::class.java)
-                preferences.saveToken("token", viewModel.token)
+                preferences.saveToken("token", "Bearer+"+viewModel.token)
                 startActivity(intent)
                 finish()
             } else {

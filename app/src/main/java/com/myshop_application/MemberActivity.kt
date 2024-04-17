@@ -33,8 +33,9 @@ class MemberActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
         val item = preferences.getMember("member") as Member
+        val token = preferences.getToken("token")
         binding.item = item
-        commonViewModel.getCategory(3000)
+        commonViewModel.getCategory(token!!,3000)
         observeViewModel()
 
     }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.myshop_application.databinding.ItemCartBinding
 import com.myshop_application.databinding.ItemOrderBinding
 import com.myshop_application.model.Cart
+import com.myshop_application.util.PreferenceUtil
 
 class OrderListAdapter() :
     ListAdapter<Cart, OrderViewHolder>(diffUtil) {
@@ -26,7 +27,8 @@ class OrderListAdapter() :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return OrderViewHolder(ItemOrderBinding.inflate(inflater, parent, false))
+        val token = PreferenceUtil(parent.context).getToken("token")!!
+        return OrderViewHolder(ItemOrderBinding.inflate(inflater, parent, false), token)
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {

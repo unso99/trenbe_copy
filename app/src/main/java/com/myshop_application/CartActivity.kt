@@ -20,6 +20,7 @@ class CartActivity : AppCompatActivity() {
         DetailViewModel.ViewModelFactory(CartRepositoryImpl())
     }
     private lateinit var preferences: PreferenceUtil
+    private var token = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
@@ -28,6 +29,7 @@ class CartActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
         preferences = PreferenceUtil(this)
+        token = preferences.getToken("token")!!
         observeViewModel()
     }
 
@@ -47,7 +49,7 @@ class CartActivity : AppCompatActivity() {
     private fun getCart() {
         val member = preferences.getMember("member")
         val cart = Cart(member_id = member!!.email)
-        viewModel.getCarts(cart)
+        viewModel.getCarts(token, cart)
     }
 
     fun goHome() {
@@ -62,7 +64,7 @@ class CartActivity : AppCompatActivity() {
 
     inner class Handler : CartItemHandler {
         override fun onDeleteItem(item: Cart) {
-            viewModel.deleteCart(item)
+            viewModel.deleteCart(token, item)
         }
 
     }

@@ -6,7 +6,7 @@ import com.myshop_application.model.CommonResponse
 import retrofit2.Response
 
 class CommonRepositoryImpl : CommonRepository {
-    override suspend fun getCommonList(body: Common): Response<CommonResponse> {
-        return RetrofitManager.commonService.getCommonList(body)
+    override suspend fun getCommonList(token: String, body: Common): Response<CommonResponse> {
+        return RetrofitManager.commonService.getCommonList(token,body)
     }
 }

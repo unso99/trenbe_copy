@@ -9,6 +9,7 @@ import com.myshop_application.repository.ImageProvider
 
 class ProductViewHolder(
     private val binding: ItemProdBinding,
+    private val token : String,
     private val handler : ProductItemHandler? = null
     ) :
     RecyclerView.ViewHolder(binding.root), ImageProvider.Callback {
@@ -16,7 +17,7 @@ class ProductViewHolder(
     fun bind(item: Product) {
         binding.item = item
         binding.handler = handler
-        ImageProvider(this).getImage(item.imageUrl!!)
+        ImageProvider(this).getImage(token,item.imageUrl!!)
     }
 
     override fun getImage(bitmap: Bitmap) {

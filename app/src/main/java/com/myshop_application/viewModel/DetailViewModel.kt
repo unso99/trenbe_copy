@@ -18,9 +18,9 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
 
     var price = 0L
 
-    fun addCart(dto: Cart) {
+    fun addCart(token:String,dto: Cart) {
         viewModelScope.launch {
-            val response = repository.addCart(dto)
+            val response = repository.addCart(token,dto)
             if (response.isSuccessful) {
                 _isSuccess.postValue(true)
             } else {
@@ -29,9 +29,9 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
         }
     }
 
-    fun getCarts(dto: Cart) {
+    fun getCarts(token:String,dto: Cart) {
         viewModelScope.launch {
-            val response = repository.getCarts(dto)
+            val response = repository.getCarts(token,dto)
             if (response.isSuccessful) {
                 _list.postValue(response.body()?.list ?: emptyList())
                 price = 0
@@ -44,9 +44,9 @@ class DetailViewModel(private val repository: CartRepository) : ViewModel() {
         }
     }
 
-    fun deleteCart(dto: Cart) {
+    fun deleteCart(token:String,dto: Cart) {
         viewModelScope.launch {
-            val response = repository.deleteCart(dto);
+            val response = repository.deleteCart(token,dto);
             if (response.isSuccessful) {
                 _list.postValue(response.body()?.list ?: emptyList())
                 price = 0

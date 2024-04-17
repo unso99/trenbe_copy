@@ -4,10 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Looper
-import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.TextWatcher
 import android.text.style.ForegroundColorSpan
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +17,7 @@ import com.myshop_application.list.ProductListAdapter
 import com.myshop_application.model.Product
 import com.myshop_application.repository.CommonRepositoryImpl
 import com.myshop_application.repository.ProductRepositoryImpl
+import com.myshop_application.util.PreferenceUtil
 import com.myshop_application.viewModel.MainViewModel
 
 class SearchActivity : AppCompatActivity() {
@@ -28,6 +27,7 @@ class SearchActivity : AppCompatActivity() {
     }
     private val adapter = ProductListAdapter(Handler())
     private val keywordHandler = android.os.Handler(Looper.getMainLooper())
+    private lateinit var preferences: PreferenceUtil
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -35,13 +35,17 @@ class SearchActivity : AppCompatActivity() {
         binding.view = this
         binding.lifecycleOwner = this
         binding.recyclerView.adapter = adapter
+        preferences = PreferenceUtil(this)
+        val token = preferences.getToken("token")
         binding.keywordEdtiText.addTextChangedListener {
             val runnable = Runnable {
-                getList(it.toString())
+                getList(token!!,it.toString())
             }
             keywordHandler.removeCallbacks(runnable)
-            keywordHandler.postDelayed(runnable,300)
+            keywordHandler.postDelayed(runnable, 300)
         }
+
+
         observeViewModel()
     }
 
@@ -51,14 +55,19 @@ class SearchActivity : AppCompatActivity() {
             val resultText = "${it.size}개의 검색결과"
             val spannableString = SpannableString(resultText)
             val colorSpan = ForegroundColorSpan(Color.RED)
-            spannableString.setSpan(colorSpan, 0, resultText.indexOf("개"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannableString.setSpan(
+                colorSpan,
+                0,
+                resultText.indexOf("개"),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
             binding.resultTextView.text = spannableString
             binding.resultTextView.isVisible = true
         }
     }
 
-    private fun getList(keyword: String) {
-        viewModel.getSearchList(keyword)
+    private fun getList(token: String, keyword: String) {
+        viewModel.getSearchList(token, keyword)
     }
 
     fun back() {

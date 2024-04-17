@@ -13,9 +13,9 @@ class OrderDetailViewModel(private val repository: OrderDetailRepository) : View
     private val _isSuccess = MutableLiveData<Boolean>()
     val isSuccess: LiveData<Boolean> = _isSuccess
 
-    fun addOrderDetail(dto: OrderDetail) {
+    fun addOrderDetail(token: String, dto: OrderDetail) {
         viewModelScope.launch {
-            val response = repository.addOrderDetail(dto)
+            val response = repository.addOrderDetail(token, dto)
             if (response.isSuccessful) {
                 _isSuccess.postValue(true)
             } else {

@@ -5,5 +5,5 @@ import com.myshop_application.model.OrderDetailResponse
 import retrofit2.Response
 
 interface OrderDetailRepository {
-    suspend fun addOrderDetail(body: OrderDetail): Response<OrderDetailResponse>
+    suspend fun addOrderDetail(token:String,body: OrderDetail): Response<OrderDetailResponse>
 }

@@ -31,7 +31,7 @@ class LoginViewModel(private val repository: MemberRepository) : ViewModel() {
 
     fun getMember(dto: Member) {
         viewModelScope.launch {
-            val response = repository.getMember(dto)
+            val response = repository.getMember(token,dto)
             if (response.isSuccessful) {
                 _member.postValue(response.body()?.dto ?: Member())
             } else {

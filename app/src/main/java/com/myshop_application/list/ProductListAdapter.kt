@@ -6,13 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.myshop_application.databinding.ItemProdBinding
 import com.myshop_application.model.Product
+import com.myshop_application.util.PreferenceUtil
 
 class ProductListAdapter(private val itemHandler: ProductItemHandler? = null) :
     ListAdapter<Product, ProductViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ProductViewHolder(ItemProdBinding.inflate(inflater, parent, false), itemHandler)
+        val token = PreferenceUtil(parent.context).getToken("token")!!
+        return ProductViewHolder(
+            ItemProdBinding.inflate(inflater, parent, false),
+            token,
+            itemHandler
+        )
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {

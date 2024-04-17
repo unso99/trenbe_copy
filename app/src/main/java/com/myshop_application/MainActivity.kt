@@ -18,11 +18,11 @@ import com.myshop_application.viewModel.MainViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels {
-        MainViewModel.ViewModelFactory(ProductRepositoryImpl(),CommonRepositoryImpl())
+        MainViewModel.ViewModelFactory(ProductRepositoryImpl(), CommonRepositoryImpl())
     }
     private val adapter = ProductListAdapter(Handler())
-    private lateinit var preferences : PreferenceUtil
-    private var token : String? = ""
+    private lateinit var preferences: PreferenceUtil
+    private var token: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        viewModel.getCommonList(Common(p_code_id = 1000))
+        viewModel.getCommonList(token!!,Common(p_code_id = 1000))
         viewModel.commonList.observe(this) {
             it.forEach { common ->
                 val tab = binding.tabLayout.newTab()
@@ -56,27 +56,27 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.text) {
                     "All" -> {
-                        getList(Product())
+                        getList(token!!,Product())
                     }
 
                     "니트웨어" -> {
-                        getList(Product(category = "1001"))
+                        getList(token!!,Product(category = "1001"))
                     }
 
                     "티셔츠/맨투맨" -> {
-                        getList(Product(category = "1002"))
+                        getList(token!!,Product(category = "1002"))
                     }
 
                     "셔츠" -> {
-                        getList(Product(category = "1003"))
+                        getList(token!!,Product(category = "1003"))
                     }
 
                     "자켓" -> {
-                        getList(Product(category = "1004"))
+                        getList(token!!,Product(category = "1004"))
                     }
 
                     "블레이저/수트" -> {
-                        getList(Product(category = "1005"))
+                        getList(token!!,Product(category = "1005"))
                     }
                 }
             }
@@ -93,32 +93,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        getList(Product())
+        getList(token!!,Product())
         viewModel.list.observe(this) {
             adapter.submitList(it)
         }
     }
 
-    private fun getList(body : Product) {
-        viewModel.getList(body)
+    private fun getList(token: String, body: Product) {
+        viewModel.getList(token, body)
     }
 
     fun goCart() {
-        startActivity(Intent(this,CartActivity::class.java))
+        startActivity(Intent(this, CartActivity::class.java))
     }
 
     fun goSearch() {
-        startActivity(Intent(this,SearchActivity::class.java))
+        startActivity(Intent(this, SearchActivity::class.java))
     }
 
     fun goMyPage() {
-        startActivity(Intent(this,MemberActivity::class.java))
+        startActivity(Intent(this, MemberActivity::class.java))
     }
 
     inner class Handler : ProductItemHandler {
         override fun onClickItem(item: Product) {
-            val intent = Intent(this@MainActivity,DetailActivity::class.java)
-            intent.putExtra("item",item)
+            val intent = Intent(this@MainActivity, DetailActivity::class.java)
+            intent.putExtra("item", item)
             startActivity(intent)
         }
     }

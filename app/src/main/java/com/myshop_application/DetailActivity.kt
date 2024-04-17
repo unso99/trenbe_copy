@@ -32,8 +32,8 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
         binding.item = item
         setContentView(binding.root)
         preferenceUtil = PreferenceUtil(this)
-        token = intent.getStringExtra("token")
-        imageProvider.getImage(item.imageUrl!!)
+        token = preferenceUtil.getToken("token")
+        imageProvider.getImage(token!!,item.imageUrl!!)
         initSpinner()
         observeViewModel()
     }
@@ -77,7 +77,7 @@ class DetailActivity : AppCompatActivity(), ImageProvider.Callback {
             member_id = member_id,
             product_id = product_id
         )
-        viewModel.addCart(cart)
+        viewModel.addCart(token!!,cart)
     }
 
     fun goCart() {

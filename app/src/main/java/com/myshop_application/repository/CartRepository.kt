@@ -5,9 +5,9 @@ import com.myshop_application.model.CartResponse
 import retrofit2.Response
 
 interface CartRepository {
-    suspend fun addCart(dto: Cart): Response<CartResponse>
+    suspend fun addCart(token:String,dto: Cart): Response<CartResponse>
 
-    suspend fun getCarts(dto: Cart): Response<CartResponse>
+    suspend fun getCarts(token:String,dto: Cart): Response<CartResponse>
 
-    suspend fun deleteCart(dto: Cart): Response<CartResponse>
+    suspend fun deleteCart(token:String,dto: Cart): Response<CartResponse>
 }
