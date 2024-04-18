@@ -46,17 +46,29 @@
 
 ## Contents
 
-### 웰컴 페이지
+### 로그인 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/961d6d07-8021-4060-8621-ca3575a82309)
 
+### 회원가입 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/127c7316-a034-43c3-80e1-387596b69df0)
 
 ### 메인 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/7f669e6c-4c62-44be-b2ba-7ee82d14790b)
 
+### 제품 상세 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/2db9dc25-f549-4495-9b83-a2ddc3bce9b2)
 
-### 메뉴 상세 페이지
+### 검색 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/95978422-69cf-4f72-9743-670dcdcc7343)
 
+### 마이 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/8e34b62d-e88f-4dbd-b52c-908ace7664c6)
 
 ### 장바구니 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/5ebfbc31-b5e8-4db7-943b-ee4d273e8f2f)
+
+### 주문 페이지
+![image](https://github.com/unso99/trenbe_copy/assets/94777814/d7a5e668-7418-426e-8011-6b5c80580764)
 
 
-### 시연영상
 
